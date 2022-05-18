@@ -57,7 +57,7 @@ public class Aluno {
     }
 
     public String setDataCadastro() {
-        String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+        String timeStamp = new SimpleDateFormat("dd.MM.yyyy").format(new Date());
         this.dataCadastro = timeStamp;
         return dataCadastro;
     }
