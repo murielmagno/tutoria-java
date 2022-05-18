@@ -53,6 +53,19 @@ public class Exec {
         System.out.println("Informe o nome do Aluno");
         String resposta = entrada.nextLine();
         aluno.setNome(resposta);
+
+        System.out.println("Informe o nome da Mae do Aluno");
+        resposta = entrada.nextLine();
+        aluno.setNomeMae(resposta);
+
+        System.out.println("Informe o nome do Pai do Aluno");
+        resposta = entrada.nextLine();
+        aluno.setNomePai(resposta);
+
+        System.out.println("Informe a data de nascimento do aluno: Ex. 22/02/2000");
+        resposta = entrada.nextLine();
+        aluno.setDataNascimento(resposta);
+
         alunoService.validaAluno(aluno);
     }
 
