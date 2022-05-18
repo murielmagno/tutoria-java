@@ -16,7 +16,7 @@ public class AlunoDAO {
 	}
 
 	public void adicionarBanco(Aluno aluno) {
-		String sql = "INSERT INTO aluno(nome,nomeMae,nomePai,dataNascimento,dataCadastro) VALUES(?,?,?,?,?)";
+		String sql = "INSERT INTO aluno(nome, nome_mae, nome_pai, dt_nasc, dt_cadastro) VALUES(?,?,?,?,?)";
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			stmt.setString(1, aluno.getNome());
@@ -31,42 +31,46 @@ public class AlunoDAO {
 		}
 	}
 
-	public List<String> selectListaAlunos() {
-		String sql = "SELECT * FROM ALUNO";
+	public List<Aluno> selectListaAlunos() {
+		String sql = "SELECT * FROM aluno";
 		try {
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery(sql);
-			return getStrings(stmt, rs);
+			return recuperaAlunos(stmt, rs);
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
 	}
 
-	public List<String> selectAlunoPorId(String idAluno) {
-		String sql = "SELECT * FROM ALUNO WHERE id = " + idAluno;
+	public List<Aluno> selectAlunoPorId(String idAluno) {
+		String sql = "SELECT * FROM aluno WHERE id = " + idAluno;
 		try {
 			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery(sql);
-			return getStrings(stmt, rs);
+			return recuperaAlunos(stmt, rs);
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
 	}
 
-	private List<String> getStrings(Statement stmt, ResultSet rs) throws SQLException {
-		List<String> list = new ArrayList<>();
+	private List<Aluno> recuperaAlunos(Statement stmt, ResultSet rs) throws SQLException {
+		List<Aluno> lista = new ArrayList<Aluno>();
+
 		while (rs.next()) {
-			String id = String.valueOf(rs.getString("Id"));
-			String nome = rs.getString("Nome");
-			String nomeMae = rs.getString("nomemae");
-			String nomePai = rs.getString("nomepai");
-			String dataNascimento = rs.getString("datanascimento");
-			String dataCadastro = rs.getString("datacadastro");
-			list.add("Aluno{" + "id=" + id + ", nome='" + nome + '\'' + ", nomeMae='" + nomeMae + '\'' + ", nomePai='"
-					+ nomePai + '\'' + ", dataNascimento='" + dataNascimento + '\'' + ", dataCadastro='" + dataCadastro
-					+ '\'' + '}');
+			Aluno aluno = new Aluno();
+
+			aluno.setId(rs.getInt("id"));
+			aluno.setNome(rs.getString("nome"));
+			aluno.setNomeMae(rs.getString("nome_mae"));
+			aluno.setNomePai(rs.getString("nome_pai"));
+			aluno.setDataNascimento(rs.getString("dt_nasc"));
+			aluno.setDataCadastro(rs.getString("dt_cadastro"));
+
+			lista.add(aluno);
 		}
+
 		stmt.close();
-		return list;
+
+		return lista;
 	}
 }

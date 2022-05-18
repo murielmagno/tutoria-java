@@ -1,8 +1,5 @@
 package entities;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 public class Aluno {
 
 	private Integer id;
@@ -53,12 +50,11 @@ public class Aluno {
 	}
 
 	public String getDataCadastro() {
-		return setDataCadastro();
+		return this.dataCadastro;
 	}
 
-	public String setDataCadastro() {
-		String timeStamp = new SimpleDateFormat("dd.MM.yyyy").format(new Date());
-		this.dataCadastro = timeStamp;
-		return dataCadastro;
+	public void setDataCadastro(String dataCadastro) {
+		this.dataCadastro = dataCadastro;
 	}
+		
 }

@@ -2,6 +2,8 @@
 import service.AlunoService;
 
 import java.sql.SQLException;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Scanner;
 
 import entities.Aluno;
@@ -24,22 +26,34 @@ public class Main {
 
 			switch (entrada.nextLine()) {
 			case "1":
+				limpaTela();
 				adicionarAluno();
+				pressioneQualquerTecla();
 				break;
 			case "2":
+				limpaTela();
 				listarAlunos();
+				pressioneQualquerTecla();
 				break;
 			case "3":
+				limpaTela();
 				buscarPorId();
+				pressioneQualquerTecla();
 				break;
 			case "4":
+				limpaTela();
 				System.out.println("Tchau... :)");
+				pressioneQualquerTecla();
 				continuar = false;
 				break;
 			default:
+				limpaTela();
 				System.out.println("Por favor, selecione uma opção válida.");
+				pressioneQualquerTecla();
 				break;
 			}
+			
+			limpaTela();
 		}
 
 		entrada.close();
@@ -56,15 +70,15 @@ public class Main {
 	private static void adicionarAluno() {
 		Aluno aluno = new Aluno();
 
-		System.out.println("Informe o nome do Aluno");
+		System.out.println("Informe o nome do aluno:");
 		String resposta = entrada.nextLine();
 		aluno.setNome(resposta);
 
-		System.out.println("Informe o nome da Mae do Aluno");
+		System.out.println("Informe o nome da Mae do Aluno:");
 		resposta = entrada.nextLine();
 		aluno.setNomeMae(resposta);
 
-		System.out.println("Informe o nome do Pai do Aluno");
+		System.out.println("Informe o nome do Pai do Aluno:");
 		resposta = entrada.nextLine();
 		aluno.setNomePai(resposta);
 
@@ -76,12 +90,38 @@ public class Main {
 	}
 
 	private static void listarAlunos() {
-		System.out.println(alunoService.listaAlunos());
+		List<Aluno> listaAlunos = alunoService.listaAlunos();
+		printaAlunos(listaAlunos);
 	}
 
 	private static void buscarPorId() {
 		System.out.print("Informe o id do aluno: ");
 		String idBusca = entrada.nextLine();
-		System.out.println(alunoService.listaAlunoPorId(idBusca));
+		List<Aluno> listaAlunos = alunoService.listaAlunoPorId(idBusca);
+		printaAlunos(listaAlunos);
+	}
+	
+	private static void printaAlunos(List<Aluno> listaAlunos) {
+		Iterator<Aluno> it = listaAlunos.iterator();
+
+		while(it.hasNext()) {
+			Aluno aluno = it.next();
+
+			System.out.printf("%-4s\t", aluno.getId());
+			System.out.printf("%-20s\t", aluno.getNome());
+			System.out.printf("%-10s\t", aluno.getDataNascimento());
+			System.out.println();
+		}
+	}
+	
+	private static void limpaTela() {
+		for (int i = 0; i < 100; i++) {
+			System.out.println("\r\n");
+		}
+	}
+	
+	private static void pressioneQualquerTecla() {
+		System.out.println("\n\nPressione qualquer tecla para continuar...");
+		entrada.nextLine();
 	}
 }
