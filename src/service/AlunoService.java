@@ -7,24 +7,26 @@ import java.util.List;
 
 public class AlunoService {
 
-    private AlunoDAO alunoDAO = new AlunoDAO();
-    public Aluno validaAluno(Aluno aluno){
-        if(aluno.getNome() != null  && !aluno.getNome().isEmpty()
-        && aluno.getNomeMae() != null  && !aluno.getNomeMae().isEmpty()
-        && aluno.getDataNascimento() != null  && !aluno.getDataNascimento().isEmpty()){
-            alunoDAO.adicionarBanco(aluno);
-        }else {
-            System.out.println("Verifique os dados cadastrados, o Nome do aluno, nome da m„e do aluno e data de nascimento s„o obrigatorios!!");
-            System.out.println();
-        }
-        return null;
-    }
+	private AlunoDAO alunoDAO = new AlunoDAO();
 
-    public List<String> listaAlunos(){
-        return alunoDAO.selectListaAlunos();
-    }
+	public Aluno validaAluno(Aluno aluno) {
+		if (aluno.getNome() != null && !aluno.getNome().isEmpty() && aluno.getNomeMae() != null
+				&& !aluno.getNomeMae().isEmpty() && aluno.getDataNascimento() != null
+				&& !aluno.getDataNascimento().isEmpty()) {
+			alunoDAO.adicionarBanco(aluno);
+		} else {
+			System.out.println(
+					"Verifique os dados cadastrados, o Nome do aluno, nome da m√£e do aluno e data de nascimento s√£o obrigat√≥rios!!");
+			System.out.println();
+		}
+		return null;
+	}
 
-    public List<String> listaAlunoPorId(String id){
-        return alunoDAO.selectAlunoPorId(id);
-    }
+	public List<String> listaAlunos() {
+		return alunoDAO.selectListaAlunos();
+	}
+
+	public List<String> listaAlunoPorId(String id) {
+		return alunoDAO.selectAlunoPorId(id);
+	}
 }
