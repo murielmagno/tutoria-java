@@ -30,6 +30,10 @@ Sugestão de novo menu:
 - As operações devem ter **tratamento de exceção** para todos os casos. Em caso de erro, o programa deve apresentar a mensagem de erro adequada e retornar ao menu principal.
 - Essa atividade prática vale até **2,0 pontos**.
 
+### Entrega
+Você deverá subir um repositório público no `Github` contendo o código da sua implementação. Disponibilize o link como comentário [nessa issue](https://github.com/murielmagno/tutoria-java/issues/1).
+Só serão avaliados os comentários enviados na `issue` até o dia 04/06/2022 até as 23:59:59.
+
 ### Bônus
 O projeto contém ainda duas classes no pacote `entities` que não estão sendo utilizadas: **Turma** e **Professor**. Como tarefa bônus, modifique o programa para ser possível cadastrar essas duas entidades no banco de dados. O programa deve considerar as relações entre as classes na construção da solução. O banco de dados deverá ser modelado de acordo.
 
